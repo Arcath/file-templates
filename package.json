@@ -1,0 +1,22 @@
+{
+  "name": "file-templates",
+  "main": "./lib/file-templates",
+  "description": "File template manager for Atom",
+  "repository": "https://github.com/arcath/file-templates",
+  "license": "MIT",
+  "engines": {
+    "atom": "*"
+  },
+  "activationCommands": {
+    "atom-workspace": [
+      "file-templates:new-file",
+      "file-templates:new-template"
+    ]
+  },
+  "dependencies": {
+    "atom-space-pen-views": "^0",
+    "fs-plus": "^2.0.4",
+    "space-pen": "^4",
+    "underscore": "^1.8.2"
+  }
+}
