@@ -1,7 +1,6 @@
 {SelectListView} = require 'atom-space-pen-views'
 
 _ = require 'underscore'
-crypto = require 'crypto'
 fs = require 'fs-plus'
 path = require 'path'
 
