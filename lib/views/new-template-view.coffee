@@ -31,7 +31,7 @@ module.exports =
       atom.workspace.getActivePane().activate()
 
     onConfirm: (name) ->
-      contents = atom.workspace.getActiveEditor().getText()
+      contents = atom.workspace.getActiveTextEditor().getText()
       templateHash = crypto.createHash('sha1').update(name + contents).digest('hex')
 
       @destroy()
@@ -50,7 +50,7 @@ module.exports =
           "name": name
           "author": 'local'
           "hash": templateHash
-          "grammarScope": atom.workspace.getActiveEditor().getGrammar().scopeName
+          "grammarScope": atom.workspace.getActiveTextEditor().getGrammar().scopeName
         }
 
         json = JSON.stringify templates

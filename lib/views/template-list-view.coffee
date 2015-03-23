@@ -15,18 +15,20 @@ module.exports =
       @panel = atom.workspace.addModalPanel(item: this)
       @storeFocusedElement()
       @filterEditorView.focus()
+      @setItems _.values(@templateList())
 
     cancel: ->
       super
       @panel.hide()
       atom.workspace.getActivePane().activate()
 
-    attached: ->
-      @setItems _.values(@templateList())
-
     getFilterKey: ->
       "name"
 
     templateList: ->
-      file = fs.readFileSync path.join(atom.config.get('file-templates.templateStore'), 'index.json'), "utf8"
-      JSON.parse file
+      indexPath = path.join(atom.config.get('file-templates.templateStore'), 'index.json')
+      if fs.existsSync(indexPath)
+        file = fs.readFileSync indexPath, "utf8"
+        return JSON.parse file
+      else
+        return {}
