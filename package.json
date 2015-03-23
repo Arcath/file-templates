@@ -19,5 +19,6 @@
     "fs-plus": "^2.0.4",
     "space-pen": "^4",
     "underscore": "^1.8.2"
-  }
+  },
+  "version": "0.0.1"
 }
