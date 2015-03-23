@@ -9,6 +9,7 @@
   },
   "activationCommands": {
     "atom-workspace": [
+      "file-templates:delete-template",
       "file-templates:new-file",
       "file-templates:new-template"
     ]

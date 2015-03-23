@@ -57,3 +57,5 @@ module.exports =
 
         fs.writeFileSync path.join(atom.config.get('file-templates.templateStore'), 'index.json'), json
         fs.writeFileSync path.join(atom.config.get('file-templates.templateStore'), templateHash + '.template'), contents
+
+        atom.notifications.addSuccess("Template #{name} created")
