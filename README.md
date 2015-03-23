@@ -1,4 +1,5 @@
 # File Templates
+[![Build Status](https://travis-ci.org/Arcath/file-templates.svg)](https://travis-ci.org/Arcath/file-templates)
 
 An Atom package for working with file templates.
 
