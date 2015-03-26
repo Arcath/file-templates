@@ -2,8 +2,10 @@ _ = require 'underscore'
 fs = require 'fs-plus'
 path = require 'path'
 
+UpdateTemplateView = require '../lib/views/update-template-view'
+
 describe 'File Templates', ->
-  [activationPromise, templateHash, indexPath] = []
+  [activationPromise, templateHash, indexPath, itemForTests] = []
 
   templateList = ->
     unless indexPath?
@@ -86,6 +88,84 @@ describe 'File Templates', ->
             found = true
 
         expect(found).toBe true
+
+  describe 'Updating a Template', ->
+    it 'should open the template list', ->
+      atom.commands.dispatch atom.views.getView(atom.workspace), 'file-templates:update-template'
+
+      waitsForPromise ->
+        activationPromise
+
+      runs ->
+        view = atom.workspace.getModalPanels()[0]
+
+        item = false
+        for entry in view.item.items
+          if entry.name == 'SpecTestTemplate'
+            item = entry
+
+        expect(item).not.toBe false
+        itemForTests = item
+
+    it 'should open the update view', ->
+      atom.commands.dispatch atom.views.getView(atom.workspace), 'file-templates:update-template'
+
+      waitsForPromise ->
+        activationPromise
+
+      runs ->
+        view = atom.workspace.getModalPanels()[0]
+
+        view.item.confirmed(itemForTests)
+
+        waitsFor ->
+          !(view.item.panel.visible)
+
+        runs ->
+          updateView = atom.workspace.getModalPanels()[1]
+          expect(updateView.item.nameEditor.getText()).toBe 'SpecTestTemplate'
+
+    it 'should let you update all values', ->
+      atom.commands.dispatch atom.views.getView(atom.workspace), 'file-templates:update-template'
+
+      waitsForPromise ->
+        activationPromise
+
+      runs ->
+        atom.workspace.getModalPanels()[0].item.cancel()
+        updateView = new UpdateTemplateView(itemForTests)
+
+        updateView.attach()
+
+        expect(updateView.nameEditor.getText()).toBe 'SpecTestTemplate'
+        expect(updateView.grammarEditor.getText()).toBe 'text.plain.null-grammar'
+
+        updateView.grammarEditor.setText('changed.by.specs')
+
+        updateView.updateTemplate()
+
+        list = templateList()
+        expect(list[itemForTests.hash].grammarScope).toBe 'changed.by.specs'
+
+    it 'should let you edit the template contents', ->
+      atom.commands.dispatch atom.views.getView(atom.workspace), 'file-templates:update-template'
+
+      waitsForPromise ->
+        activationPromise
+
+      runs ->
+        atom.workspace.getModalPanels()[0].item.cancel()
+        updateView = new UpdateTemplateView(itemForTests)
+
+        updateView.attach()
+        updateView.editContents()
+
+        waitsFor ->
+          atom.workspace.getActiveTextEditor()?.buffer?.file?.path == path.join(atom.config.get('file-templates.templateStore'), itemForTests.hash + '.template')
+
+        runs ->
+          expect(atom.workspace.getActiveTextEditor().getGrammar().scopeName).toBe 'text.plain.null-grammar'
+
 
   describe 'Deleteting a Template', ->
     it 'should allow deletion of a template', ->
