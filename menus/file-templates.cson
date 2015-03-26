@@ -1,0 +1,14 @@
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'File Templates'
+      'submenu': [
+        { 'label': 'New template from this file', 'command': 'file-templates:new-template'},
+        { 'label': 'New file from template', 'command': 'file-templates:new-file'},
+        { 'label': 'Delete a template', 'command': 'file-templates:delete-template' },
+        { 'label': 'Update a template', 'command': 'file-templates:update-template' }
+      ]
+    ]
+  }
+]
