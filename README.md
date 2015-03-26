@@ -9,6 +9,8 @@ Trigger `File Templates: New Template` from the command palette, give your templ
 
 Trigger `File Templates: New File` and select a template from the list, you will now be given a new file with the contents of the template.
 
+Trigger `File Templates: Update Template` and select a template from the list, you will now be given a modal box where you can change the name & grammar of the template. There is also a button to edit the contents of the template which opens the file from the template store in a new tab.
+
 Trigger `File Templates: Delete File` and select a template the list, this template will now be deleted.
 
 ## Config
