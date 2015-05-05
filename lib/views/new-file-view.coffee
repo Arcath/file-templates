@@ -11,6 +11,6 @@ module.exports =
         contents = fs.readFileSync path.join(atom.config.get('file-templates.templateStore'), item.hash + '.template'), "utf8"
         grammar = atom.grammars.grammarForScopeName(item.grammarScope)
 
-        atom.workspace.getActiveEditor().setText(contents)
+        atom.workspace.getActiveTextEditor().setText(contents)
         if grammar
-          atom.workspace.getActiveEditor().setGrammar(grammar)
+          atom.workspace.getActiveTextEditor().setGrammar(grammar)

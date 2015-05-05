@@ -57,7 +57,7 @@ module.exports =
         grammar = atom.grammars.grammarForScopeName(item.grammarScope)
 
         if grammar
-          atom.workspace.getActiveEditor().setGrammar(grammar)
+          atom.workspace.getActiveTextEditor().setGrammar(grammar)
 
     templateList: ->
       indexPath = path.join(atom.config.get('file-templates.templateStore'), 'index.json')
