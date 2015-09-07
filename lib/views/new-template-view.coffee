@@ -23,8 +23,13 @@ module.exports =
       @createButton.on 'click', => @onConfirm(@miniEditor.getText())
 
     attach: ->
-      @panel = atom.workspace.addModalPanel(item: this)
-      @miniEditor.focus()
+      editor = atom.workspace.getActiveTextEditor()
+
+      if editor
+        @panel = atom.workspace.addModalPanel(item: this)
+        @miniEditor.focus()
+      else
+        atom.notifications.addError('File Templates', {detail: 'You have no editor open. Please create your template then run `File Templates: New Template` again to save it.'})
 
     destroy: ->
       @panel.destroy()

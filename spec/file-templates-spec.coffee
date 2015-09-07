@@ -22,38 +22,57 @@ describe 'File Templates', ->
       throw reason
 
   describe 'Adding a Template', ->
-    it 'should appear at the top of the screen', ->
+    it 'should show an error if no editor is open', ->
       modalCount = atom.workspace.getModalPanels().length
-      editor = atom.workspace.getActiveTextEditor()
-
       atom.commands.dispatch atom.views.getView(atom.workspace), 'file-templates:new-template'
 
       waitsForPromise ->
         activationPromise
 
       runs ->
-        expect(atom.workspace.getModalPanels().length).toBe (modalCount + 1)
+        expect(atom.workspace.getModalPanels().length).toBe modalCount
+        expect(atom.notifications.getNotifications().reverse()[0].message).toBe 'File Templates'
+
+    it 'should appear at the top of the screen', ->
+      waitsForPromise ->
+        atom.workspace.open()
+
+      runs ->
+        modalCount = atom.workspace.getModalPanels().length
+        editor = atom.workspace.getActiveTextEditor()
+
+        atom.commands.dispatch atom.views.getView(atom.workspace), 'file-templates:new-template'
+
+        waitsForPromise ->
+          activationPromise
+
+        runs ->
+          expect(atom.workspace.getModalPanels().length).toBe (modalCount + 1)
 
     it 'should let you set a name', ->
-      atom.commands.dispatch atom.views.getView(atom.workspace), 'file-templates:new-template'
-
       waitsForPromise ->
-        activationPromise
+        atom.workspace.open()
 
       runs ->
-        view = atom.workspace.getModalPanels()[0]
+        atom.commands.dispatch atom.views.getView(atom.workspace), 'file-templates:new-template'
 
-        view.item.miniEditor.setText('A Test Template')
+        waitsForPromise ->
+          activationPromise
+
+        runs ->
+          view = atom.workspace.getModalPanels()[0]
+
+          view.item.miniEditor.setText('A Test Template')
 
     it 'should save the template', ->
-      atom.commands.dispatch atom.views.getView(atom.workspace), 'file-templates:new-template'
-
       waitsForPromise ->
-        activationPromise
+        atom.workspace.open()
 
       runs ->
+        atom.commands.dispatch atom.views.getView(atom.workspace), 'file-templates:new-template'
+
         waitsForPromise ->
-          atom.workspace.open()
+          activationPromise
 
         runs ->
           view = atom.workspace.getModalPanels()[0]
