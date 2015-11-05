@@ -18,8 +18,6 @@ describe 'File Templates', ->
 
   beforeEach ->
     activationPromise = atom.packages.activatePackage('file-templates')
-    activationPromise.fail (reason) ->
-      throw reason
 
   describe 'Adding a Template', ->
     it 'should show an error if no editor is open', ->
