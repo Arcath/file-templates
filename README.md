@@ -13,6 +13,15 @@ Trigger `File Templates: Update Template` and select a template from the list, y
 
 Trigger `File Templates: Delete File` and select a template the list, this template will now be deleted.
 
+## Macroses
+
+You can add on of predefined macroses to your template, like this:
+* `@timestamp@`: Will be replaced with current timestamp in ISO format (i.e. `2016-09-02T08:32:11.073Z`)
+* `@author@`: Will be replaced with your `git config user.name`
+* `@email@`: Will be replaced with your `git config user.email`
+
+To make `@author@` and `@email@` work in your project, it must be a GIT repository.
+
 ## Config
 
 The only config for file templates is the location it saves templates, by default this is `~/.atom/file-templates` but you can set it to anything.
