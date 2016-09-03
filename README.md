@@ -13,6 +13,25 @@ Trigger `File Templates: Update Template` and select a template from the list, y
 
 Trigger `File Templates: Delete File` and select a template the list, this template will now be deleted.
 
+## Macros
+
+You can add on of the predefined macros to your template, like this:
+* `@timestamp@`: Will be replaced with current timestamp in ISO format (i.e. `2016-09-02T08:32:11.073Z`)
+* `@author@`: Will be replaced with your `git config user.name`
+* `@email@`: Will be replaced with your `git config user.email`
+
+To make `@author@` and `@email@` work in your project, it must be a GIT repository.
+
+You can add custom macros to your [init file](http://flight-manual.atom.io/hacking-atom/sections/the-init-file/) like so
+
+```coffee
+proccess.fileTemplates = {
+  macros:
+    foo: ->
+      return 'new text here'
+}
+```
+
 ## Config
 
 The only config for file templates is the location it saves templates, by default this is `~/.atom/file-templates` but you can set it to anything.
