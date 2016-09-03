@@ -22,6 +22,16 @@ You can add on of the predefined macros to your template, like this:
 
 To make `@author@` and `@email@` work in your project, it must be a GIT repository.
 
+You can add custom macros to your [init file](http://flight-manual.atom.io/hacking-atom/sections/the-init-file/) like so
+
+```coffee
+proccess.fileTemplates = {
+  macros:
+    foo: ->
+      return 'new text here'
+}
+```
+
 ## Config
 
 The only config for file templates is the location it saves templates, by default this is `~/.atom/file-templates` but you can set it to anything.
