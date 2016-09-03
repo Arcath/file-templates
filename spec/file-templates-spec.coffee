@@ -2,6 +2,7 @@ _ = require 'underscore'
 fs = require 'fs-plus'
 path = require 'path'
 
+Macros = require '../lib/macros'
 UpdateTemplateView = require '../lib/views/update-template-view'
 
 describe 'File Templates', ->
@@ -209,3 +210,9 @@ describe 'File Templates', ->
 
         runs ->
           expect(templateList()[templateHash]).toBe undefined
+
+  describe 'Macros', ->
+    it 'should parse macros', ->
+      string = 'Time: @timestamp@'
+
+      expect(Macros.process(string)).toMatch /^Time: 20/
