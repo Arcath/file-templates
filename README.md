@@ -13,9 +13,9 @@ Trigger `File Templates: Update Template` and select a template from the list, y
 
 Trigger `File Templates: Delete File` and select a template the list, this template will now be deleted.
 
-## Macroses
+## Macros
 
-You can add on of predefined macroses to your template, like this:
+You can add on of the predefined macros to your template, like this:
 * `@timestamp@`: Will be replaced with current timestamp in ISO format (i.e. `2016-09-02T08:32:11.073Z`)
 * `@author@`: Will be replaced with your `git config user.name`
 * `@email@`: Will be replaced with your `git config user.email`
