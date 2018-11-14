@@ -25,7 +25,7 @@ To make `@author@` and `@email@` work in your project, it must be a GIT reposito
 You can add custom macros to your [init file](http://flight-manual.atom.io/hacking-atom/sections/the-init-file/) like so
 
 ```coffee
-proccess.fileTemplates = {
+process.fileTemplates = {
   macros:
     foo: ->
       return 'new text here'
