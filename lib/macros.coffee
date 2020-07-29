@@ -1,5 +1,8 @@
 module.exports =
   macros:
+    date: ->
+      (new Date()).toISOString().split('T')[0]
+
     timestamp: ->
       (new Date()).toISOString()
 
